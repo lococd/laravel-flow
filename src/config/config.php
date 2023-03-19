@@ -127,4 +127,6 @@ return [
 
     'tipo_integracion' => 'f',
 
+    'api_key' => env('FLOW_API_KEY', 'inserteapikey'),
+    'secret_key' => env('FLOW_SECRET_KEY', 'insertesecretkey')
 ];
