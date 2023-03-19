@@ -331,12 +331,13 @@ class Flow {
     private function flow_get_public_key_id() {
         //global $flow_keys;
         try {
-            $fp = fopen(__DIR__."/keys/flow.pubkey", "r");
+            /*$fp = fopen(__DIR__."/keys/flow.pubkey", "r");
             $pub_key = fread($fp, 8192);
-            fclose($fp);
+            fclose($fp);*/
+            $pub_key = config('flow.api_key');
             return openssl_get_publickey($pub_key);
         } catch (Exception $e) {
-            $this->flow_log("Error al intentar obtener la llave pública - Error-> " .$e->getMessage(), "flow_get_public_key_id");
+            $this->flow_log("Error al intentar obtener la api key - Error-> " .$e->getMessage(), "flow_get_public_key_id");
             throw new Exception($e->getMessage());
         }
     }
@@ -344,12 +345,13 @@ class Flow {
     private function flow_get_private_key_id() {
         //global $flow_keys;
         try {
-            $fp = fopen(config('flow.keys')."/comercio.pem", "r");
+            /*$fp = fopen(config('flow.keys')."/comercio.pem", "r");
             $priv_key = fread($fp, 8192);
-            fclose($fp);
+            fclose($fp);*/
+            $priv_key = config('flow.secret_key');
             return openssl_get_privatekey($priv_key);
         } catch (Exception $e) {
-            $this->flow_log("Error al intentar obtener la llave privada - Error-> " .$e->getMessage(), "flow_get_private_key_id");
+            $this->flow_log("Error al intentar obtener la secret key - Error-> " .$e->getMessage(), "flow_get_private_key_id");
             throw new Exception($e->getMessage());
         }
     }
